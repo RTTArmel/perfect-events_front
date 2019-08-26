@@ -1,0 +1,148 @@
+button{
+    border: none;
+    background: none;
+}
+
+.image{
+    max-height: 200px !important;
+    width: auto !important;
+}
+
+.carte{
+    height: 450px !important;
+    margin-right: 8% !important;
+    margin-bottom: 5% !important;
+}
+
+.vide{
+    height: 10% !important;
+}
+p{
+    text-align: left;
+}
+
+#popup{
+    z-index: 99 !important;
+    border-radius: 5px;
+    background-image: radial-gradient(closest-side ellipse at center, #ffc500, #e7695a);
+    padding: 20px !important;
+    
+}
+
+#slid{
+    height: 700px !important;
+}
+
+#slid1{
+    box-align: center;
+    height: 700px !important;
+    width: auto !important;
+}
+
+
+.sidebar-fixed{
+    background-image: url("../images/rouge.jpg");
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+  
+.text-pop{
+    text-align: center;
+font-weight: bolder;
+}
+
+.sary{
+    max-height: 200px !important;
+    width: auto !important;
+}
+
+.sary1{
+    max-height: 100px !important;
+    width: auto !important;
+}
+
+.item{
+    font-weight: bold !important;
+    font-size: 20px;
+}
+
+/* autre */
+/* table{
+    margin-top: 10px;
+    background-color: rgb(123, 170, 170);
+    margin-bottom:10px;
+    border: 1px solid black;
+    width: 660px !important;
+    text-align: center;
+}
+
+.prix{
+    text-align: right !important;
+}
+
+center{
+    margin-bottom: 20px !important;
+}
+
+.act{
+    width: 70px;
+}
+th{
+    border: 1px solid black;
+}
+td{
+    background-color: white !important;
+    border: 1px solid black;
+}
+
+#somme {
+    text-align: left !important;
+  }
+
+  #e {
+    color: red;
+  }
+
+  .ar {
+    text-align: right !important;
+  } 
+
+#suppr{
+    margin-bottom: 2px;
+    padding-top: 1px !important;
+    height: 20px;
+    font-size: 10px;
+    font-weight: bolder;
+    margin-left: 4px;
+   
+}
+
+#list{
+    background-color:rgb(92, 197, 216); 
+    background: rgb(197, 216, 213);
+}
+
+input{
+    background: red;
+}
+
+#prix{
+    text-align: right;
+}
+
+#somme{
+    border: 1px solid white;
+    width: 200px;
+    margin-left: 450px;
+  
+}
+
+#popup{
+    border-radius: 5px;
+    background-color:rgb(231, 145, 145);
+    padding: 20px 50px 20px 50px !important;
+}
+
+.btn-warning{
+    margin-left: 450px;
+} */
