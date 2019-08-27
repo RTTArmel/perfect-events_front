@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 class Routes extends React.Component {
   render() {
     return (
-      <div className="container fluid">
+      <div className="container-fluid">
       <Switch>
         <Route path='/admin/upload' component={Nouveau} />
         <Route path='/admin/article' component={Article} />
