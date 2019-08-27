@@ -2,11 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import Footer from './../components/Footer';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { MDBNavbar, MDBInput, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBContainer } from "mdbreact";
 import { MDBCarousel, MDBCarouselCaption, MDBCarouselInner, MDBCarouselItem, MDBView, MDBMask } from "mdbreact";
-import { MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
-import { confirmAlert } from 'react-confirm-alert'; // Import
+import { MDBBtn, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from 'mdbreact';
+import { confirmAlert } from 'react-confirm-alert';
 import './article.css'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 
@@ -16,20 +17,20 @@ class Home extends React.Component {
         this.state = {
             collapseID: "",
             comment: [],
-            modal: false,
+            modal: '',
         };
     }
 
-    // toggle = () => {
-    //     this.setState({
-    //         modal: !this.state.modal,
-    //     });
-    // }
+    toggle = () => {
+        this.setState({
+            modal: !this.state.modal,
+        });
+    }
 
-    // toggleCollapse = collapseID => () =>
-    //     this.setState(prevState => ({
-    //         collapseID: prevState.collapseID !== collapseID ? collapseID : ""
-    //     }));
+    toggleCollapse = collapseID => () =>
+        this.setState(prevState => ({
+            collapseID: prevState.collapseID !== collapseID ? collapseID : ""
+        }));
 
     renderRedirect = () => {
         if (this.state.redirect) {
@@ -50,30 +51,41 @@ class Home extends React.Component {
         })
     }
 
-    // componentWillUpdate() {
-    //     axios.get("http://localhost:8080/service").then(res => {
-    //         console.log('res comment: ', res.data)
-    //         this.setState({ comment: res.data })
-    //         console.log('comment: ', this.state.comment)
-    //     })
-    // }
+    triage(categorie) {
+        axios.get("http://localhost:8080/service").then(res => {
+            console.log('res comment: ', res.data)
+            var tab = []
+            for (let i = 0; i < res.data.length; i++) {
+                if (res.data[i].categorie == categorie) {
+                    tab.push(res.data[i])
+                }
+            }
+            this.setState({ comment: tab })
+            console.log('comment: ', this.state.comment)
+        })
+    }
 
     render() {
         return (
             <div className="homePage container-fluid">
                 <div>
+
+                    {/* ***Navbar*** */}
                     <MDBNavbar id="Totalhome"
                         color="bg-primary"
                         dark
                         expand="md"
                         scrolling
+                        className='position-fixed'
+                        style={{ position: 'absolute', zIndex: '1000', float: 'left', width: '103.2%', marginLeft: '-3%' }}
                     >
 
                         <MDBNavbarBrand>
                             <img src="../images/logoPM.png" id="logo-header" alt="imagelogo" />
                         </MDBNavbarBrand>
                         <MDBNavbarToggler
-                        // onClick={this.toggleCollapse("navbarCollapse")}
+                            image="../images/hamburger3.gif"
+                            onClick={this.toggleCollapse("navbarCollapse")}
                         />
                         <MDBCollapse
                             id="navbarCollapse"
@@ -83,30 +95,45 @@ class Home extends React.Component {
 
                             <MDBNavbarNav right>
                                 <MDBNavItem className='item'>
-                                    <MDBNavLink to="#" className="accueil">Services</MDBNavLink>
+                                    <MDBNavLink to="#" className="item accueil">Services</MDBNavLink>
                                 </MDBNavItem>
                                 <MDBNavItem className='item'>
-                                    <MDBNavLink to="#" className="accueil">Prestataires</MDBNavLink>
+                                    <MDBDropdown>
+                                        <MDBDropdownToggle nav caret>
+                                            <span className="mr-2 item accueil">Dropdown</span>
+                                        </MDBDropdownToggle>
+                                        <MDBDropdownMenu>
+                                            <MDBDropdownItem onClick={() => this.triage("Tete")}>Têtes de cortège</MDBDropdownItem>
+                                            <MDBDropdownItem onClick={() => this.triage("Décoration")}>Salles de réception</MDBDropdownItem>
+                                            <MDBDropdownItem href="#!">Décorations</MDBDropdownItem>
+                                            <MDBDropdownItem href="#!">Services traiteurs</MDBDropdownItem>
+                                            <MDBDropdownItem href="#!">Photographes/VIdéastes</MDBDropdownItem>
+                                            <MDBDropdownItem divider />
+                                            <MDBDropdownItem onClick={() => this.componentDidMount()}>Afficher tous</MDBDropdownItem>
+                                        </MDBDropdownMenu>
+                                    </MDBDropdown>
                                 </MDBNavItem>
                                 <MDBNavItem className='item'>
                                     <MDBNavLink to="/login" className="accueil">Connexion</MDBNavLink>
                                 </MDBNavItem>
-                                {/* <MDBNavItem>
-                                    <MDBNavLink to="/register" className="accueil">Créer Compte</MDBNavLink>
-                                </MDBNavItem> */}
+
                             </MDBNavbarNav>
                         </MDBCollapse>
 
                     </MDBNavbar>
+
+
+
                     <center>
                         <MDBCarousel id="slider"
+                            light
                             activeItem={1}
                             length={4}
                             showControls={true}
                             showIndicators={true}
                         >
                             <MDBCarouselInner>
-                                <MDBCarouselItem id='slid' itemId="1">
+                                <MDBCarouselItem id='slid' itemId="1" style={{ marginTop: '10%' }}>
                                     <MDBView>
 
                                         <img id='slid1'
@@ -174,23 +201,22 @@ class Home extends React.Component {
                 <div className='container-fluid'>
                     <div className='row'>
                         {this.state.comment.length > 0 ? (this.state.comment.sort((a, b) => { return b._id - a._id }).map((service, _id) => (
-                            <div className='col-md-12 carte' key={_id}>
-                                <div className="card mask rgba-white-slight">
+                            <div className='' key={_id}>
+                                    <div className="card col-md-12 carte ">
                                     <div class="card-body">
                                         {service._id % 2 == 0 ? (<div className='container-fluid'>
                                             <div className="row">
-                                                <div className="col-md-4">
-                                                    <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image} alt={service.titre} style={{ width: 'auto', height: '100%', float: 'right' }} />
-                                                </div>
-                                                <div className="col-md-2">
-                                                    <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image1} alt={service.titre} style={{ width: '100%', maxHeight: '300px' }} />
-                                                    <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image2} alt={service.titre} style={{ width: '100%', maxHeight: '300px' }} />
+                                                <div className="col-md-6">
+                                                    <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image} alt={service.titre} style={{ width: '80%', height: '100%', maxHeight: '100%', float: 'left', border: "none" }} />
+                                               
+                                                    <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image1} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} /><br />
+                                                    <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image2} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} />
                                                 </div>
                                                 <div className="col-md-6">
                                                     <center>
                                                         <h5 class="card-title">{service.titre}</h5>
-                                                        <p class="test">Description: <br />Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad minus magni similique dignissimos assumenda labore iure velit voluptatibus doloribus adipisci soluta voluptas illum vero, excepturi sapiente laborum deserunt, sint ipsa. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt nam facilis quae! Laborum maxime dolores aspernatur error fugit perspiciatis, recusandae, voluptas accusantium libero molestiae laudantium iure porro similique voluptatibus quis?</p>
-                                                        <p class="test">Prix: {service.prix}</p>
+                                                        <p class="test"><u>Description:</u> <br />Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad minus magni similique dignissimos assumenda labore iure velit voluptatibus doloribus adipisci soluta voluptas illum vero, excepturi sapiente laborum deserunt, sint ipsa. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt nam facilis quae! Laborum maxime dolores aspernatur error fugit perspiciatis, recusandae, voluptas accusantium libero molestiae laudantium iure porro similique voluptatibus quis?</p>
+                                                        <p class="test">Prix: <strong>{service.prix} Ariary</strong></p>
                                                         <MDBBtn rounded className="button" id="boutton" onClick={e => {
                                                             confirmAlert({
                                                                 customUI: ({ onClose }) => {
@@ -245,6 +271,7 @@ class Home extends React.Component {
                                                     </center>
                                                 </div>
                                             </div>
+                                            <br/>
                                         </div>) : (
                                                 <div className='container-fluid'>
                                                     <div className="row">
@@ -306,12 +333,11 @@ class Home extends React.Component {
                                                                 }}>S'inscrire</MDBBtn>
                                                             </center>
                                                         </div>
-                                                        <div className="col-md-4">
-                                                            <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image} alt={service.titre} style={{ width: 'auto', height: '100%', float: 'right' }} />
-                                                        </div>
-                                                        <div className="col-md-2">
-                                                            <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image1} alt={service.titre} style={{ width: '100%', maxHeight: '300px' }} />
-                                                            <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image2} alt={service.titre} style={{ width: '100%', maxHeight: '300px' }} />
+                                                        <div className="col-md-6">
+                                                            <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image} alt={service.titre} style={{ width: '80%', height: '100%', float: 'right', border: "none" }} />
+                                                       
+                                                            <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image1} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} />
+                                                            <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image2} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -321,7 +347,7 @@ class Home extends React.Component {
                                     {/* <img class="card-img-top img-thumbnail" src={"https://tsiorytahback.herokuapp.com/service/" + service.image} alt={service.titre} /> */}
 
                                 </div>
-                                <br />
+                                <br/>
                             </div>
                         )
                         )) : ''}
@@ -342,24 +368,3 @@ const mapStateToProps = (state) => {
     }
 }
 export default connect(mapStateToProps)(Home)
-
-
-
-{/* <MDBContainer key={_id}>
-                                    <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
-                                        <MDBModalHeader>{article.titre}</MDBModalHeader>
-                                        <MDBModalBody>
-                                            <center>
-                                                <img class="card-img-top img-thumbnail" src={"http:localhost:8080/service/" + article.image} alt={article.image} />
-                                                <img class="card-img-top img-thumbnail" src={"http:localhost:8080/service/" + article.image1} alt={article.image1} />
-                                                <img class="card-img-top img-thumbnail" src={"http:localhost:8080/service/" + article.image2} alt={article.image2} />
-                                                <p>{article.description}</p>
-                                                <p>{article.prix}</p>
-                                            </center>
-                                        </MDBModalBody>
-                                        <MDBModalFooter>
-                                            <MDBBtn color="secondary" onClick={() => { this.toggle() }}>Close</MDBBtn>
-                                        </MDBModalFooter>
-                                    </MDBModal>
-                                </MDBContainer> */}
-

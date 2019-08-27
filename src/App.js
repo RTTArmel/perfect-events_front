@@ -10,6 +10,7 @@ import Store from './store/configureStore'
 import Article from './components/article'
 import Admin from './components/admin'
 import Upload from './components/postupload'
+
 function App() {
   return (
     <div className="">
@@ -20,7 +21,6 @@ function App() {
             <div className="container">
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
-              {/* <Route path="/article/:id" component={Article } /> */}
               <Route path="/admin" component={Admin} />
               <Route path="/upload" component={Upload} />
               <Route path="/article" component={Article} />

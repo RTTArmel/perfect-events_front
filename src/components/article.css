@@ -9,9 +9,7 @@ button{
 }
 
 .carte{
-    height: 450px !important;
-    margin-right: 8% !important;
-    margin-bottom: 5% !important;
+    text-align: justify !important;
 }
 
 .vide{
@@ -30,6 +28,7 @@ p{
 }
 
 #slid{
+    margin-top: 8%;
     height: 700px !important;
 }
 
@@ -64,6 +63,7 @@ font-weight: bolder;
 .item{
     font-weight: bold !important;
     font-size: 20px;
+    background-color: none !important;
 }
 
 /* autre */

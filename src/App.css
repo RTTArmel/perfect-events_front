@@ -44,18 +44,19 @@ background-repeat: repeat-y;
 
 #Totalhome {
   background-color: rgb(255, 20, 51) !important;
-  height: 150px;
+  height: 20%;
 }
 
 #h3slide {
   font-weight: bold;
 }
 .accueil:hover {
-  color: rgb(122, 163, 161) !important;
+  color: rgb(252, 179, 85) !important;
   font-weight: bold;
 }
 #logo-header {
-  width: 160px;
+  margin-left: 10px;
+  width: 130px;
   cursor: pointer;
 }
 .white-text {
