@@ -43,21 +43,38 @@ class TopNavigation extends Component {
     render() {
         return (
             <div className='container-fluid topbar-fixed'>
-            <MDBNavbar className="flexible-navbar" light expand="md" scrolling>
-                <MDBNavbarBrand>
-                    {this.renderRedirect()}
-                    <strong>Bonjour {localStorage.getItem('user')}</strong>
-                </MDBNavbarBrand>
-                <MDBNavbarToggler onClick={this.onClick} />
-                <MDBCollapse isOpen={this.state.collapse} navbar>
-                    
-                    <MDBNavbarNav right>
-                        <MDBNavItem onClick={() => {this.deconnection()}}>
-                            <MDBNavLink rel="noopener noreferrer" className="nav-link Ripple-parent" href="/login">Deconnexion</MDBNavLink>
-                        </MDBNavItem>
-                    </MDBNavbarNav>
-                </MDBCollapse>
-            </MDBNavbar>
+
+                <MDBNavbar id="Totalhome"
+                    dark
+                    expand="md"
+                    scrolling
+                    className='position-fixed'
+                    style={{ position: 'absolute', zIndex: '5', float: 'left', height: '100px', width: '87%', marginTop: '-6%',  marginLeft: '10%' }}
+                >
+
+                    <MDBNavbarBrand className="bonjour">
+                        {this.renderRedirect()}
+                        <strong>Bonjour {localStorage.getItem('user')}</strong>
+                    </MDBNavbarBrand>
+                    <MDBNavbarToggler
+                        image="../images/hamburger3.gif"
+                        onClick={() => this.onClick()}
+                    />
+                    <MDBCollapse
+                        id="navbarCollapse"
+                        isOpen={this.state.collapse}
+                        navbar
+                    >
+
+                        <MDBNavbarNav right>
+                            <MDBNavItem className='item' onClick={() => { this.deconnection() }}>
+                                <MDBNavLink rel="noopener noreferrer" className="nav-link Ripple-parent accueil" href="/login"><MDBIcon icon="sign-out-alt" className="mr-3" />Deconnexion</MDBNavLink>
+                            </MDBNavItem>
+
+                        </MDBNavbarNav>
+                    </MDBCollapse>
+
+                </MDBNavbar>
             </div>
         );
     }

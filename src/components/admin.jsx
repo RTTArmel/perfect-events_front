@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Redirect } from 'react-router-dom'
-import Routes from '../../src/components/Routes';
+import RoutesDash from '../../src/components/Routes';
 import TopNavigation from './../components/topNavigation';
 import SideNavigation from './../components/sideNavigation';
 import Footer from './../components/Footer';
@@ -30,14 +30,14 @@ class Admin extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid">
         <div className="container-fluid">
           {this.renderRedirect()}
           <SideNavigation />
           <TopNavigation />
-          <main id="content" className="p-5">
-            <Routes />
-          </main>
+          <div id="content" className="container-fluid contenuDash">
+            <RoutesDash />
+          </div>
           <Footer />
         </div>
       </div>

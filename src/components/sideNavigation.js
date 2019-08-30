@@ -24,17 +24,17 @@ const TopNavigation = () => {
                     </MDBListGroupItem>
                 </NavLink>
 
-                <NavLink id="lien-dasboard" to="/admin/article" >
+                <NavLink id="lien-dasboard" exact={true} to="/admin/article" >
                     <MDBListGroupItem>
                         <MDBIcon icon="clipboard-list" className="mr-3" />
-                        Liste des Articles
+                        Liste des Services
                     </MDBListGroupItem>
                 </NavLink>
 
-                <NavLink id="lien-dasboard" to="/" >
+                <NavLink id="lien-dasboard" exact={true} to="/" >
                     <MDBListGroupItem>
                         <MDBIcon icon="home" className="mr-3" />
-                        Accueil ExtraComm
+                        Perfect Events
                     </MDBListGroupItem>
                 </NavLink>
 
