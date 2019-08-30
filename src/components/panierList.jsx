@@ -49,7 +49,7 @@ class Panier extends React.Component {
 
     componentDidMount() {
         
-        axios.get("http://localhost:8080/service").then(res => {
+        axios.get("https://perfect-back.herokuapp.com/service").then(res => {
             var tab = []
             for (let i = 0; i < res.data.length; i++) {
                 if (res.data[i].active == true) {
@@ -58,7 +58,7 @@ class Panier extends React.Component {
                 // localStorage.setItem('idService' + res.data[i]._id, res.data[i]._id)
             }
             this.setState({ comment: tab })
-            axios.get('http://localhost:8080/getList').then(response => {
+            axios.get('https://perfect-back.herokuapp.com/getList').then(response => {
                 this.setState({ list: response.data })
                 console.log('listPANIER:', this.state.list);
                 
@@ -132,8 +132,8 @@ class Panier extends React.Component {
     }
 
     affichages() {
-        axios.get("http://localhost:8080/service").then(res => {
-            axios.get('http://localhost:8080/getList').then(response => {
+        axios.get("https://perfect-back.herokuapp.com/service").then(res => {
+            axios.get('https://perfect-back.herokuapp.com/getList').then(response => {
                 var listService = []
                 var tabListOK = []
                 for (let i = 0; i < response.data.length; i++) {
@@ -169,7 +169,7 @@ class Panier extends React.Component {
     }
 
     triage(categorie) {
-        axios.get("http://localhost:8080/service").then(res => {
+        axios.get("https://perfect-back.herokuapp.com/service").then(res => {
             console.log('res comment: ', res.data)
             var tab = []
             for (let i = 0; i < res.data.length; i++) {
@@ -183,7 +183,7 @@ class Panier extends React.Component {
     }
 
     signin() {
-        axios.post('http://localhost:8080/signin', {
+        axios.post('https://perfect-back.herokuapp.com/signin', {
             nom: this.state.nom,
             password: this.state.password
         })
@@ -250,10 +250,10 @@ class Panier extends React.Component {
                                             <div className='container-fluid'>
                                                 <div className="row">
                                                     <div className="col-md-6">
-                                                        <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image} alt={service.titre} style={{ width: '80%', height: '100%', maxHeight: '100%', float: 'left', border: "none" }} />
+                                                        <img class="card-img-top img-thumbnail" src={"https://perfect-back.herokuapp.com/service/" + service.image} alt={service.titre} style={{ width: '80%', height: '100%', maxHeight: '100%', float: 'left', border: "none" }} />
 
-                                                        <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image1} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} /><br />
-                                                        <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image2} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} />
+                                                        <img class="card-img-top img-thumbnail" src={"https://perfect-back.herokuapp.com/service/" + service.image1} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} /><br />
+                                                        <img class="card-img-top img-thumbnail" src={"https://perfect-back.herokuapp.com/service/" + service.image2} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} />
                                                     </div>
                                                     <div className="col-md-6">
                                                         <center>
@@ -280,10 +280,10 @@ class Panier extends React.Component {
                                                             </p>
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image} alt={service.titre} style={{ width: '80%', height: '100%', float: 'right', border: "none" }} />
+                                                            <img class="card-img-top img-thumbnail" src={"https://perfect-back.herokuapp.com/service/" + service.image} alt={service.titre} style={{ width: '80%', height: '100%', float: 'right', border: "none" }} />
 
-                                                            <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image1} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} />
-                                                            <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image2} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} />
+                                                            <img class="card-img-top img-thumbnail" src={"https://perfect-back.herokuapp.com/service/" + service.image1} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} />
+                                                            <img class="card-img-top img-thumbnail" src={"https://perfect-back.herokuapp.com/service/" + service.image2} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} />
                                                         </div>
                                                     </div>
                                                 </div>
