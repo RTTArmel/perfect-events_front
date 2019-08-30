@@ -17,7 +17,7 @@ function connexion(state = initialState, action) {
     case 'REGISTER':
       console.log("action: ", action.value);
       //axios.post('https://shrouded-shore-94366.herokuapp.com/', action.value)
-      axios.post('http://localhost:8080/register/', action.value)
+      axios.post('https://perfect-back.herokuapp.com/register/', action.value)
         .then((response) => {
           console.log("post ok: res.data ", response.data);
           localStorage.setItem('id', parseInt(response.data._id))
@@ -33,7 +33,7 @@ function connexion(state = initialState, action) {
       case 'EDIT_PROFIL':
       console.log("action: ", action.value);
       //axios.post('https://shrouded-shore-94366.herokuapp.com/', action.value)
-      axios.put("http://localhost:8080/register/"+localStorage.getItem('id'), action.value)
+      axios.put("https://perfect-back.herokuapp.com/register/"+localStorage.getItem('id'), action.value)
         .then((response) => {
           console.log("put ok: res.data ", response.data);
           localStorage.setItem('user', response.data[localStorage.getItem('id')].nom)
@@ -48,7 +48,7 @@ function connexion(state = initialState, action) {
     case 'LOGIN':
       console.log("action: ", action.value);
       //axios.post('https://shrouded-shore-94366.herokuapp.com/', action.value)
-      axios.post('http://localhost:8080/login', action.value)      
+      axios.post('https://perfect-back.herokuapp.com/login', action.value)      
         .then((response) => {
           if (response.data.nom == action.value.nom && response.data.password == action.value.password) {
             localStorage.setItem('id', response.data._id)
@@ -73,7 +73,7 @@ function connexion(state = initialState, action) {
 
     case 'GETARTICLE':
       //axios.get('https://shrouded-shore-94366.herokuapp.com/')
-      axios.get('http://localhost:8080/')
+      axios.get('https://perfect-back.herokuapp.com/')
         .then(function (response) {
           nextState = response.data
           console.log("ttt", nextState);

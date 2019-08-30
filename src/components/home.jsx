@@ -52,7 +52,7 @@ class Home extends React.Component {
         // for (let i=0; i<6; i++){
         //     localStorage.removeItem('afficheList'+i)
         // }
-        axios.get("http://localhost:8080/service").then(res => {
+        axios.get("https://perfect-back.herokuapp.com/service").then(res => {
             var tab = []
             for (let i = 0; i < res.data.length; i++) {
                 if (res.data[i].active == true) {
@@ -61,14 +61,15 @@ class Home extends React.Component {
                 // localStorage.setItem('idService' + res.data[i]._id, res.data[i]._id)
             }
             this.setState({ comment: tab })
-            axios.get('http://localhost:8080/getList').then(response => {
+
+            axios.get('https://perfect-back.herokuapp.com/getList').then(response => {
                 this.setState({ list: response.data })
-                var tab = []
+                var tab1 = []
                 var obj = {}
                 var out = []
                 for (let i = 0; i < this.state.list.length; i++) {
-                    tab.push(this.state.list[i].idClient)
-                    obj[tab[i]] = 0;
+                    tab1.push(this.state.list[i].idClient)
+                    obj[tab1[i]] = 0;
                 }
                 for (let j in obj) {
                     console.log('j:', j);
@@ -132,8 +133,8 @@ class Home extends React.Component {
     }
 
     affichages() {
-        axios.get("http://localhost:8080/service").then(res => {
-            axios.get('http://localhost:8080/getList').then(response => {
+        axios.get("https://perfect-back.herokuapp.com/service").then(res => {
+            axios.get('https://perfect-back.herokuapp.com/getList').then(response => {
                 var listService = []
                 var tabListOK = []
                 for (let i = 0; i < response.data.length; i++) {
@@ -172,7 +173,7 @@ class Home extends React.Component {
     }
 
     triage(categorie) {
-        axios.get("http://localhost:8080/service").then(res => {
+        axios.get("https://perfect-back.herokuapp.com/service").then(res => {
             console.log('res comment: ', res.data)
             var tab = []
             for (let i = 0; i < res.data.length; i++) {
@@ -186,7 +187,7 @@ class Home extends React.Component {
     }
 
     signin() {
-        axios.post('http://localhost:8080/signin', {
+        axios.post('https://perfect-back.herokuapp.com/signin', {
             nom: this.state.nom,
             password: this.state.password
         })
@@ -264,29 +265,29 @@ class Home extends React.Component {
                                         confirmAlert({
                                             customUI: ({ onClose }) => {
                                                 return (
-                                                    
-                                                        <div className="custom-ui">
 
-                                                            <h3 className="text-pop">FORMULAIRE DE CONNEXION</h3>
-                                                            <MDBInput size="sm" label="Nom ou adresse e-mail" icon="user" id="un" type="text" className="input" name="nom" value={this.state.value} placeholder="nom d'utilisateur" onChange={this.handleChange} />
-                                                            <MDBInput size="sm" label="Mots de passe" icon="lock" id="trois" type="passWord" className="input" name="password" value={this.state.value} placeholder="spécialités d'utilisateur" onChange={this.handleChange} />
-                                                            <center>
-                                                                <button className="btn btn-dark"
-                                                                    onClick={() => {
-                                                                        {
-                                                                            this.signin({
-                                                                                nom: this.state.nom,
-                                                                                password: this.state.password
-                                                                            })
-                                                                        }
-                                                                        { this.componentDidMount() }
-                                                                        onClose()
-                                                                    }}
-                                                                >Valider</button>
-                                                            </center>
+                                                    <div className="custom-ui">
 
-                                                        </div>
-                                                    
+                                                        <h3 className="text-pop">FORMULAIRE DE CONNEXION</h3>
+                                                        <MDBInput size="sm" label="Nom ou adresse e-mail" icon="user" id="un" type="text" className="input" name="nom" value={this.state.value} placeholder="nom d'utilisateur" onChange={this.handleChange} />
+                                                        <MDBInput size="sm" label="Mots de passe" icon="lock" id="trois" type="passWord" className="input" name="password" value={this.state.value} placeholder="spécialités d'utilisateur" onChange={this.handleChange} />
+                                                        <center>
+                                                            <button className="btn btn-dark"
+                                                                onClick={() => {
+                                                                    {
+                                                                        this.signin({
+                                                                            nom: this.state.nom,
+                                                                            password: this.state.password
+                                                                        })
+                                                                    }
+                                                                    { this.componentDidMount() }
+                                                                    onClose()
+                                                                }}
+                                                            >Valider</button>
+                                                        </center>
+
+                                                    </div>
+
                                                 );
                                             }
                                         })
@@ -385,10 +386,10 @@ class Home extends React.Component {
                                             <div className='container-fluid'>
                                                 <div className="row">
                                                     <div className="col-md-6">
-                                                        <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image} alt={service.titre} style={{ width: '80%', height: '100%', maxHeight: '100%', float: 'left', border: "none" }} />
+                                                        <img class="card-img-top img-thumbnail" src={"https://perfect-back.herokuapp.com/service/" + service.image} alt={service.titre} style={{ width: '80%', height: '100%', maxHeight: '100%', float: 'left', border: "none" }} />
 
-                                                        <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image1} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} /><br />
-                                                        <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image2} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} />
+                                                        <img class="card-img-top img-thumbnail" src={"https://perfect-back.herokuapp.com/service/" + service.image1} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} /><br />
+                                                        <img class="card-img-top img-thumbnail" src={"https://perfect-back.herokuapp.com/service/" + service.image2} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} />
                                                     </div>
                                                     <div className="col-md-6">
                                                         <center>
@@ -400,28 +401,32 @@ class Home extends React.Component {
                                                                 (localStorage.getItem('idClient') && localStorage.getItem('afficheList' + service._id) == 'true') ?
                                                                     (
                                                                         <MDBBtn onClick={(e) => {
-                                                                            axios.put('http://localhost:8080/updateList/' + service._id, {
-                                                                                idClient: localStorage.getItem('idClient'),
-                                                                                idService: localStorage.getItem('idService' + service._id),
-                                                                                afficheList: false
-                                                                            }).then(res => {
-                                                                                localStorage.setItem('afficheList' + service._id, 'false')
-                                                                                { this.componentDidMount() }
-                                                                            })
+                                                                            localStorage.setItem('afficheList' + service._id, 'false')
+                                                                            this.componentDidMount()
+                                                                            // axios.put('https://perfect-back.herokuapp.com/updateList/' + service._id, {
+                                                                            //     idClient: localStorage.getItem('idClient'),
+                                                                            //     idService: localStorage.getItem('idService' + service._id),
+                                                                            //     afficheList: false
+                                                                            // }).then(res => {
+                                                                            //     localStorage.setItem('afficheList' + service._id, 'false')
+                                                                            //     { this.componentDidMount() }
+                                                                            // })
                                                                         }}>Retirer de ma Liste</MDBBtn>
                                                                     ) : (
                                                                         (localStorage.getItem('idClient') && localStorage.getItem('afficheList' + service._id) == 'false') ?
                                                                             (
                                                                                 <MDBBtn onClick={(e) => {
-                                                                                    axios.put('http://localhost:8080/updateList/' + service._id, {
-                                                                                        idClient: localStorage.getItem('idClient'),
-                                                                                        idService: localStorage.getItem('idService' + service._id),
-                                                                                        afficheList: true
-                                                                                    }).then(res => {
-                                                                                        localStorage.setItem('afficheList' + service._id, 'true')
-                                                                                        console.log('get local: ', localStorage.getItem('afficheList' + service._id))
-                                                                                        { this.componentDidMount() }
-                                                                                    })
+                                                                                    localStorage.setItem('afficheList' + service._id, 'true')
+                                                                                    this.componentDidMount()
+                                                                                    // axios.put('https://perfect-back.herokuapp.com/updateList/' + service._id, {
+                                                                                    //     idClient: localStorage.getItem('idClient'),
+                                                                                    //     idService: localStorage.getItem('idService' + service._id),
+                                                                                    //     afficheList: true
+                                                                                    // }).then(res => {
+                                                                                    //     localStorage.setItem('afficheList' + service._id, 'true')
+                                                                                    //     console.log('get local: ', localStorage.getItem('afficheList' + service._id))
+                                                                                    //     { this.componentDidMount() }
+                                                                                    // })
                                                                                 }}>Ajouter dans ma Liste</MDBBtn>
                                                                             ) : (
                                                                                 (!localStorage.getItem('idClient') && localStorage.getItem('afficheList' + service._id) == 'false') ?
@@ -430,58 +435,60 @@ class Home extends React.Component {
                                                                                             confirmAlert({
                                                                                                 customUI: ({ onClose }) => {
                                                                                                     return (
-                                                                                                            <div className="custom-ui">
+                                                                                                        <div className="custom-ui">
 
-                                                                                                                <p className="text-pop">Veillez vous connecter afin d'Ajouter ce Service </p>
-                                                                                                                <MDBInput size="sm" label="Nom ou adresse e-mail" icon="user" id="un" type="text" className="input" name="nom" value={this.state.value} placeholder="nom d'utilisateur" onChange={this.handleChange} />
-                                                                                                                <MDBInput size="sm" label="Mots de passe" icon="lock" id="trois" type="passWord" className="input" name="password" value={this.state.value} placeholder="spécialités d'utilisateur" onChange={this.handleChange} />
-                                                                                                                <center>
-                                                                                                                    <button className="btn btn-dark"
-                                                                                                                        onClick={() => {
-                                                                                                                            axios.post('http://localhost:8080/signin', {
-                                                                                                                                nom: this.state.nom,
-                                                                                                                                password: this.state.password
+                                                                                                            <p className="text-pop">Veillez vous connecter afin d'Ajouter ce Service </p>
+                                                                                                            <MDBInput size="sm" label="Nom ou adresse e-mail" icon="user" id="un" type="text" className="input" name="nom" value={this.state.value} placeholder="nom d'utilisateur" onChange={this.handleChange} />
+                                                                                                            <MDBInput size="sm" label="Mots de passe" icon="lock" id="trois" type="passWord" className="input" name="password" value={this.state.value} placeholder="spécialités d'utilisateur" onChange={this.handleChange} />
+                                                                                                            <center>
+                                                                                                                <button className="btn btn-dark"
+                                                                                                                    onClick={() => {
+                                                                                                                        axios.post('https://perfect-back.herokuapp.com/signin', {
+                                                                                                                            nom: this.state.nom,
+                                                                                                                            password: this.state.password
+                                                                                                                        })
+                                                                                                                            .then((response) => {
+                                                                                                                                if (response.data == 'ko') {
+                                                                                                                                    console.log('connexion échoué');
+
+                                                                                                                                } else {
+                                                                                                                                    console.log("post ok: res.data ", response.data);
+                                                                                                                                    localStorage.setItem('idClient', parseInt(response.data._id))
+                                                                                                                                    localStorage.setItem('nomClient', response.data.nom)
+                                                                                                                                        (localStorage.getItem('idClient') && localStorage.getItem('afficheList' + service._id) == 'true') ? (
+                                                                                                                                            localStorage.setItem('afficheList' + service._id, 'false')
+                                                                                                                                            // axios.put('https://perfect-back.herokuapp.com/updateList/' + service._id, {
+                                                                                                                                            //     idClient: localStorage.getItem('idClient'),
+                                                                                                                                            //     idService: localStorage.getItem('idService' + service._id),
+                                                                                                                                            //     afficheList: false
+                                                                                                                                            // }).then(res => {
+                                                                                                                                            //     console.log(localStorage.getItem('afficheList'))
+                                                                                                                                            //     { this.componentDidMount() }
+                                                                                                                                            // })
+                                                                                                                                        ) : (
+                                                                                                                                            localStorage.setItem('afficheList' + service._id, 'true')
+                                                                                                                                            // axios.post('https://perfect-back.herokuapp.com/postList', {
+                                                                                                                                            //     idClient: localStorage.getItem('idClient'),
+                                                                                                                                            //     idService: localStorage.getItem('idService' + service._id),
+                                                                                                                                            //     afficheList: true
+                                                                                                                                            // }).then(res => {
+                                                                                                                                            //     console.log('affichage OK ', localStorage.getItem('idClient'));
+
+                                                                                                                                            //     localStorage.setItem('afficheList' + service._id, 'true')
+                                                                                                                                            // })
+                                                                                                                                        )
+                                                                                                                                }
                                                                                                                             })
-                                                                                                                                .then((response) => {
-                                                                                                                                    if (response.data == 'ko') {
-                                                                                                                                        console.log('connexion échoué');
+                                                                                                                            .catch((error) => {
+                                                                                                                                console.log("erreur be: ", error);
+                                                                                                                            });
+                                                                                                                        this.componentDidMount()
+                                                                                                                        onClose()
+                                                                                                                    }}
+                                                                                                                >Valider</button>
+                                                                                                            </center>
 
-                                                                                                                                    } else {
-                                                                                                                                        console.log("post ok: res.data ", response.data);
-                                                                                                                                        localStorage.setItem('idClient', parseInt(response.data._id))
-                                                                                                                                        localStorage.setItem('nomClient', response.data.nom)
-                                                                                                                                            (localStorage.getItem('idClient') && localStorage.getItem('afficheList' + service._id) == 'true') ? (
-                                                                                                                                                axios.put('http://localhost:8080/updateList/' + service._id, {
-                                                                                                                                                    idClient: localStorage.getItem('idClient'),
-                                                                                                                                                    idService: localStorage.getItem('idService' + service._id),
-                                                                                                                                                    afficheList: false
-                                                                                                                                                }).then(res => {
-                                                                                                                                                    console.log(localStorage.getItem('afficheList'))
-                                                                                                                                                    { this.componentDidMount() }
-                                                                                                                                                })
-                                                                                                                                            ) : (
-                                                                                                                                                axios.post('http://localhost:8080/postList', {
-                                                                                                                                                    idClient: localStorage.getItem('idClient'),
-                                                                                                                                                    idService: localStorage.getItem('idService' + service._id),
-                                                                                                                                                    afficheList: true
-                                                                                                                                                }).then(res => {
-                                                                                                                                                    console.log('affichage OK ', localStorage.getItem('idClient'));
-
-                                                                                                                                                    localStorage.setItem('afficheList' + service._id, 'true')
-                                                                                                                                                })
-                                                                                                                                            )
-                                                                                                                                    }
-                                                                                                                                })
-                                                                                                                                .catch((error) => {
-                                                                                                                                    console.log("erreur be: ", error);
-                                                                                                                                });
-                                                                                                                            { this.componentDidMount() }
-                                                                                                                            onClose()
-                                                                                                                        }}
-                                                                                                                    >Valider</button>
-                                                                                                                </center>
-
-                                                                                                            </div>
+                                                                                                        </div>
                                                                                                     );
                                                                                                 }
                                                                                             })
@@ -494,64 +501,69 @@ class Home extends React.Component {
                                                                                                     confirmAlert({
                                                                                                         customUI: ({ onClose }) => {
                                                                                                             return (
-                                                                                                                    <div className="custom-ui">
+                                                                                                                <div className="custom-ui">
 
-                                                                                                                        <p className="text-pop">Veillez vous connecter afin d'Ajouter ce Service </p>
-                                                                                                                        <MDBInput size="sm" label="Nom ou adresse e-mail" icon="user" id="un" type="text" className="input" name="nom" value={this.state.value} placeholder="nom d'utilisateur" onChange={this.handleChange} />
-                                                                                                                        <MDBInput size="sm" label="Mots de passe" icon="lock" id="trois" type="passWord" className="input" name="password" value={this.state.value} placeholder="spécialités d'utilisateur" onChange={this.handleChange} />
-                                                                                                                        <center>
-                                                                                                                            <button className="btn btn-dark"
-                                                                                                                                onClick={() => {
-                                                                                                                                    axios.post('http://localhost:8080/signin', {
-                                                                                                                                        nom: this.state.nom,
-                                                                                                                                        password: this.state.password
+                                                                                                                    <p className="text-pop">Veillez vous connecter afin d'Ajouter ce Service </p>
+                                                                                                                    <MDBInput size="sm" label="Nom ou adresse e-mail" icon="user" id="un" type="text" className="input" name="nom" value={this.state.value} placeholder="nom d'utilisateur" onChange={this.handleChange} />
+                                                                                                                    <MDBInput size="sm" label="Mots de passe" icon="lock" id="trois" type="passWord" className="input" name="password" value={this.state.value} placeholder="spécialités d'utilisateur" onChange={this.handleChange} />
+                                                                                                                    <center>
+                                                                                                                        <button className="btn btn-dark"
+                                                                                                                            onClick={() => {
+                                                                                                                                axios.post('https://perfect-back.herokuapp.com/signin', {
+                                                                                                                                    nom: this.state.nom,
+                                                                                                                                    password: this.state.password
+                                                                                                                                })
+                                                                                                                                    .then((response) => {
+                                                                                                                                        if (response.data == 'ko') {
+                                                                                                                                            console.log('connexion échoué');
+
+                                                                                                                                        } else {
+                                                                                                                                            console.log("post ok: res.data ", response.data);
+                                                                                                                                            localStorage.setItem('idClient', parseInt(response.data._id))
+                                                                                                                                            localStorage.setItem('nomClient', response.data.nom)
+                                                                                                                                                (localStorage.getItem('idClient') && localStorage.getItem('afficheList' + service._id) == 'true') ? (
+                                                                                                                                                    localStorage.setItem('afficheList' + service._id, 'false')
+                                                                                                                                                    // axios.put('https://perfect-back.herokuapp.com/updateList/' + service._id, {
+                                                                                                                                                    //     idClient: localStorage.getItem('idClient'),
+                                                                                                                                                    //     idService: localStorage.getItem('idService' + service._id),
+                                                                                                                                                    //     afficheList: false
+                                                                                                                                                    // }).then(res => {
+                                                                                                                                                    //     console.log(localStorage.getItem('afficheList'))
+                                                                                                                                                    //     { this.componentDidMount() }
+                                                                                                                                                    // })
+                                                                                                                                                ) : (
+                                                                                                                                                    localStorage.setItem('afficheList' + service._id, 'true')
+                                                                                                                                                    // axios.put('https://perfect-back.herokuapp.com/updateList/' + service._id, {
+                                                                                                                                                    //     idClient: localStorage.getItem('idClient'),
+                                                                                                                                                    //     idService: localStorage.getItem('idService' + service._id),
+                                                                                                                                                    //     afficheList: true
+                                                                                                                                                    // }).then(res => {
+                                                                                                                                                    //     localStorage.setItem('afficheList' + service._id, 'true')
+                                                                                                                                                    //     console.log(localStorage.getItem('afficheList'))
+                                                                                                                                                    //     { this.componentDidMount() }
+                                                                                                                                                    // })
+                                                                                                                                                )
+                                                                                                                                        }
                                                                                                                                     })
-                                                                                                                                        .then((response) => {
-                                                                                                                                            if (response.data == 'ko') {
-                                                                                                                                                console.log('connexion échoué');
+                                                                                                                                    .catch((error) => {
+                                                                                                                                        console.log("erreur be: ", error);
+                                                                                                                                    });
+                                                                                                                                this.componentDidMount()
+                                                                                                                                onClose()
+                                                                                                                            }}
+                                                                                                                        >Valider</button>
+                                                                                                                    </center>
 
-                                                                                                                                            } else {
-                                                                                                                                                console.log("post ok: res.data ", response.data);
-                                                                                                                                                localStorage.setItem('idClient', parseInt(response.data._id))
-                                                                                                                                                localStorage.setItem('nomClient', response.data.nom)
-                                                                                                                                                    (localStorage.getItem('idClient') && localStorage.getItem('afficheList' + service._id) == 'true') ? (
-                                                                                                                                                        axios.put('http://localhost:8080/updateList/' + service._id, {
-                                                                                                                                                            idClient: localStorage.getItem('idClient'),
-                                                                                                                                                            idService: localStorage.getItem('idService' + service._id),
-                                                                                                                                                            afficheList: false
-                                                                                                                                                        }).then(res => {
-                                                                                                                                                            console.log(localStorage.getItem('afficheList'))
-                                                                                                                                                            { this.componentDidMount() }
-                                                                                                                                                        })
-                                                                                                                                                    ) : (
-                                                                                                                                                        axios.put('http://localhost:8080/updateList/' + service._id, {
-                                                                                                                                                            idClient: localStorage.getItem('idClient'),
-                                                                                                                                                            idService: localStorage.getItem('idService' + service._id),
-                                                                                                                                                            afficheList: true
-                                                                                                                                                        }).then(res => {
-                                                                                                                                                            localStorage.setItem('afficheList' + service._id, 'true')
-                                                                                                                                                            console.log(localStorage.getItem('afficheList'))
-                                                                                                                                                            { this.componentDidMount() }
-                                                                                                                                                        })
-                                                                                                                                                    )
-                                                                                                                                            }
-                                                                                                                                        })
-                                                                                                                                        .catch((error) => {
-                                                                                                                                            console.log("erreur be: ", error);
-                                                                                                                                        });
-                                                                                                                                    { this.componentDidMount() }
-                                                                                                                                    onClose()
-                                                                                                                                }}
-                                                                                                                            >Valider</button>
-                                                                                                                        </center>
-
-                                                                                                                    </div>
+                                                                                                                </div>
                                                                                                             );
                                                                                                         }
                                                                                                     })
                                                                                                     { this.componentDidMount() }
                                                                                                 }}>Ajouter dans ma Liste</MDBBtn>
-                                                                                            ) : ('')
+                                                                                            ) : (<MDBBtn onClick={() => {
+                                                                                                localStorage.setItem('afficheList' + service._id, 'false')
+                                                                                                this.componentDidMount()
+                                                                                            }}>Ajouter dans ma Liste</MDBBtn>)
                                                                                     )
                                                                             )
 
@@ -575,28 +587,32 @@ class Home extends React.Component {
                                                                     (localStorage.getItem('idClient') && localStorage.getItem('afficheList' + service._id) == 'true') ?
                                                                         (
                                                                             <MDBBtn onClick={(e) => {
-                                                                                axios.put('http://localhost:8080/updateList/' + service._id, {
-                                                                                    idClient: localStorage.getItem('idClient'),
-                                                                                    idService: localStorage.getItem('idService' + service._id),
-                                                                                    afficheList: false
-                                                                                }).then(res => {
-                                                                                    localStorage.setItem('afficheList' + service._id, 'false')
-                                                                                    { this.componentDidMount() }
-                                                                                })
+                                                                                localStorage.setItem('afficheList' + service._id, 'false')
+                                                                                this.componentDidMount()
+                                                                                // axios.put('https://perfect-back.herokuapp.com/updateList/' + service._id, {
+                                                                                //     idClient: localStorage.getItem('idClient'),
+                                                                                //     idService: localStorage.getItem('idService' + service._id),
+                                                                                //     afficheList: false
+                                                                                // }).then(res => {
+                                                                                //     localStorage.setItem('afficheList' + service._id, 'false')
+                                                                                //     { this.componentDidMount() }
+                                                                                // })
                                                                             }}>Retirer de ma Liste</MDBBtn>
                                                                         ) : (
                                                                             (localStorage.getItem('idClient') && localStorage.getItem('afficheList' + service._id) == 'false') ?
                                                                                 (
                                                                                     <MDBBtn onClick={(e) => {
-                                                                                        axios.put('http://localhost:8080/updateList/' + service._id, {
-                                                                                            idClient: localStorage.getItem('idClient'),
-                                                                                            idService: localStorage.getItem('idService' + service._id),
-                                                                                            afficheList: true
-                                                                                        }).then(res => {
-                                                                                            localStorage.setItem('afficheList' + service._id, 'true')
-                                                                                            console.log('get local: ', localStorage.getItem('afficheList' + service._id))
-                                                                                            { this.componentDidMount() }
-                                                                                        })
+                                                                                        localStorage.setItem('afficheList' + service._id, 'true')
+                                                                                        this.componentDidMount()
+                                                                                        // axios.put('https://perfect-back.herokuapp.com/updateList/' + service._id, {
+                                                                                        //     idClient: localStorage.getItem('idClient'),
+                                                                                        //     idService: localStorage.getItem('idService' + service._id),
+                                                                                        //     afficheList: true
+                                                                                        // }).then(res => {
+                                                                                        //     localStorage.setItem('afficheList' + service._id, 'true')
+                                                                                        //     console.log('get local: ', localStorage.getItem('afficheList' + service._id))
+                                                                                        //     { this.componentDidMount() }
+                                                                                        // })
                                                                                     }}>Ajouter dans ma Liste</MDBBtn>
                                                                                 ) : (
                                                                                     (!localStorage.getItem('idClient') && localStorage.getItem('afficheList' + service._id) == 'false') ?
@@ -605,58 +621,60 @@ class Home extends React.Component {
                                                                                                 confirmAlert({
                                                                                                     customUI: ({ onClose }) => {
                                                                                                         return (
-                                                                                                                <div className="custom-ui">
+                                                                                                            <div className="custom-ui">
 
-                                                                                                                    <p className="text-pop">Veillez vous connecter afin d'Ajouter ce Service </p>
-                                                                                                                    <MDBInput size="sm" label="Nom ou adresse e-mail" icon="user" id="un" type="text" className="input" name="nom" value={this.state.value} placeholder="nom d'utilisateur" onChange={this.handleChange} />
-                                                                                                                    <MDBInput size="sm" label="Mots de passe" icon="lock" id="trois" type="passWord" className="input" name="password" value={this.state.value} placeholder="spécialités d'utilisateur" onChange={this.handleChange} />
-                                                                                                                    <center>
-                                                                                                                        <button className="btn btn-dark"
-                                                                                                                            onClick={() => {
-                                                                                                                                axios.post('http://localhost:8080/signin', {
-                                                                                                                                    nom: this.state.nom,
-                                                                                                                                    password: this.state.password
+                                                                                                                <p className="text-pop">Veillez vous connecter afin d'Ajouter ce Service </p>
+                                                                                                                <MDBInput size="sm" label="Nom ou adresse e-mail" icon="user" id="un" type="text" className="input" name="nom" value={this.state.value} placeholder="nom d'utilisateur" onChange={this.handleChange} />
+                                                                                                                <MDBInput size="sm" label="Mots de passe" icon="lock" id="trois" type="passWord" className="input" name="password" value={this.state.value} placeholder="spécialités d'utilisateur" onChange={this.handleChange} />
+                                                                                                                <center>
+                                                                                                                    <button className="btn btn-dark"
+                                                                                                                        onClick={() => {
+                                                                                                                            axios.post('https://perfect-back.herokuapp.com/signin', {
+                                                                                                                                nom: this.state.nom,
+                                                                                                                                password: this.state.password
+                                                                                                                            })
+                                                                                                                                .then((response) => {
+                                                                                                                                    if (response.data == 'ko') {
+                                                                                                                                        console.log('connexion échoué');
+
+                                                                                                                                    } else {
+                                                                                                                                        console.log("post ok: res.data ", response.data);
+                                                                                                                                        localStorage.setItem('idClient', parseInt(response.data._id))
+                                                                                                                                        localStorage.setItem('nomClient', response.data.nom)
+                                                                                                                                            (localStorage.getItem('idClient') && localStorage.getItem('afficheList' + service._id) == 'true') ? (
+                                                                                                                                                localStorage.setItem('afficheList' + service._id, 'false')
+                                                                                                                                                // axios.put('https://perfect-back.herokuapp.com/updateList/' + service._id, {
+                                                                                                                                                //     idClient: localStorage.getItem('idClient'),
+                                                                                                                                                //     idService: localStorage.getItem('idService' + service._id),
+                                                                                                                                                //     afficheList: false
+                                                                                                                                                // }).then(res => {
+                                                                                                                                                //     console.log(localStorage.getItem('afficheList'))
+                                                                                                                                                //     { this.componentDidMount() }
+                                                                                                                                                // })
+                                                                                                                                            ) : (
+                                                                                                                                                localStorage.setItem('afficheList' + service._id, 'true')
+                                                                                                                                                // axios.post('https://perfect-back.herokuapp.com/postList', {
+                                                                                                                                                //     idClient: localStorage.getItem('idClient'),
+                                                                                                                                                //     idService: localStorage.getItem('idService' + service._id),
+                                                                                                                                                //     afficheList: true
+                                                                                                                                                // }).then(res => {
+                                                                                                                                                //     console.log('affichage OK ', localStorage.getItem('idClient'));
+
+                                                                                                                                                //     localStorage.setItem('afficheList' + service._id, 'true')
+                                                                                                                                                // })
+                                                                                                                                            )
+                                                                                                                                    }
                                                                                                                                 })
-                                                                                                                                    .then((response) => {
-                                                                                                                                        if (response.data == 'ko') {
-                                                                                                                                            console.log('connexion échoué');
+                                                                                                                                .catch((error) => {
+                                                                                                                                    console.log("erreur be: ", error);
+                                                                                                                                });
+                                                                                                                            this.componentDidMount()
+                                                                                                                            onClose()
+                                                                                                                        }}
+                                                                                                                    >Valider</button>
+                                                                                                                </center>
 
-                                                                                                                                        } else {
-                                                                                                                                            console.log("post ok: res.data ", response.data);
-                                                                                                                                            localStorage.setItem('idClient', parseInt(response.data._id))
-                                                                                                                                            localStorage.setItem('nomClient', response.data.nom)
-                                                                                                                                                (localStorage.getItem('idClient') && localStorage.getItem('afficheList' + service._id) == 'true') ? (
-                                                                                                                                                    axios.put('http://localhost:8080/updateList/' + service._id, {
-                                                                                                                                                        idClient: localStorage.getItem('idClient'),
-                                                                                                                                                        idService: localStorage.getItem('idService' + service._id),
-                                                                                                                                                        afficheList: false
-                                                                                                                                                    }).then(res => {
-                                                                                                                                                        console.log(localStorage.getItem('afficheList'))
-                                                                                                                                                        { this.componentDidMount() }
-                                                                                                                                                    })
-                                                                                                                                                ) : (
-                                                                                                                                                    axios.post('http://localhost:8080/postList', {
-                                                                                                                                                        idClient: localStorage.getItem('idClient'),
-                                                                                                                                                        idService: localStorage.getItem('idService' + service._id),
-                                                                                                                                                        afficheList: true
-                                                                                                                                                    }).then(res => {
-                                                                                                                                                        console.log('affichage OK ', localStorage.getItem('idClient'));
-
-                                                                                                                                                        localStorage.setItem('afficheList' + service._id, 'true')
-                                                                                                                                                    })
-                                                                                                                                                )
-                                                                                                                                        }
-                                                                                                                                    })
-                                                                                                                                    .catch((error) => {
-                                                                                                                                        console.log("erreur be: ", error);
-                                                                                                                                    });
-                                                                                                                                { this.componentDidMount() }
-                                                                                                                                onClose()
-                                                                                                                            }}
-                                                                                                                        >Valider</button>
-                                                                                                                    </center>
-
-                                                                                                                </div>
+                                                                                                            </div>
                                                                                                         );
                                                                                                     }
                                                                                                 })
@@ -669,64 +687,69 @@ class Home extends React.Component {
                                                                                                         confirmAlert({
                                                                                                             customUI: ({ onClose }) => {
                                                                                                                 return (
-                                                                                                                        <div className="custom-ui">
+                                                                                                                    <div className="custom-ui">
 
-                                                                                                                            <p className="text-pop">Veillez vous connecter afin d'Ajouter ce Service </p>
-                                                                                                                            <MDBInput size="sm" label="Nom ou adresse e-mail" icon="user" id="un" type="text" className="input" name="nom" value={this.state.value} placeholder="nom d'utilisateur" onChange={this.handleChange} />
-                                                                                                                            <MDBInput size="sm" label="Mots de passe" icon="lock" id="trois" type="passWord" className="input" name="password" value={this.state.value} placeholder="spécialités d'utilisateur" onChange={this.handleChange} />
-                                                                                                                            <center>
-                                                                                                                                <button className="btn btn-dark"
-                                                                                                                                    onClick={() => {
-                                                                                                                                        axios.post('http://localhost:8080/signin', {
-                                                                                                                                            nom: this.state.nom,
-                                                                                                                                            password: this.state.password
+                                                                                                                        <p className="text-pop">Veillez vous connecter afin d'Ajouter ce Service </p>
+                                                                                                                        <MDBInput size="sm" label="Nom ou adresse e-mail" icon="user" id="un" type="text" className="input" name="nom" value={this.state.value} placeholder="nom d'utilisateur" onChange={this.handleChange} />
+                                                                                                                        <MDBInput size="sm" label="Mots de passe" icon="lock" id="trois" type="passWord" className="input" name="password" value={this.state.value} placeholder="spécialités d'utilisateur" onChange={this.handleChange} />
+                                                                                                                        <center>
+                                                                                                                            <button className="btn btn-dark"
+                                                                                                                                onClick={() => {
+                                                                                                                                    axios.post('https://perfect-back.herokuapp.com/signin', {
+                                                                                                                                        nom: this.state.nom,
+                                                                                                                                        password: this.state.password
+                                                                                                                                    })
+                                                                                                                                        .then((response) => {
+                                                                                                                                            if (response.data == 'ko') {
+                                                                                                                                                console.log('connexion échoué');
+
+                                                                                                                                            } else {
+                                                                                                                                                console.log("post ok: res.data ", response.data);
+                                                                                                                                                localStorage.setItem('idClient', parseInt(response.data._id))
+                                                                                                                                                localStorage.setItem('nomClient', response.data.nom)
+                                                                                                                                                    (localStorage.getItem('idClient') && localStorage.getItem('afficheList' + service._id) == 'true') ? (
+                                                                                                                                                        localStorage.setItem('afficheList' + service._id, 'false')
+                                                                                                                                                        // axios.put('https://perfect-back.herokuapp.com/updateList/' + service._id, {
+                                                                                                                                                        //     idClient: localStorage.getItem('idClient'),
+                                                                                                                                                        //     idService: localStorage.getItem('idService' + service._id),
+                                                                                                                                                        //     afficheList: false
+                                                                                                                                                        // }).then(res => {
+                                                                                                                                                        //     console.log(localStorage.getItem('afficheList'))
+                                                                                                                                                        //     { this.componentDidMount() }
+                                                                                                                                                        // })
+                                                                                                                                                    ) : (
+                                                                                                                                                        localStorage.setItem('afficheList' + service._id, 'true')
+                                                                                                                                                        // axios.put('https://perfect-back.herokuapp.com/updateList/' + service._id, {
+                                                                                                                                                        //     idClient: localStorage.getItem('idClient'),
+                                                                                                                                                        //     idService: localStorage.getItem('idService' + service._id),
+                                                                                                                                                        //     afficheList: true
+                                                                                                                                                        // }).then(res => {
+                                                                                                                                                        //     localStorage.setItem('afficheList' + service._id, 'true')
+                                                                                                                                                        //     console.log(localStorage.getItem('afficheList'))
+                                                                                                                                                        //     { this.componentDidMount() }
+                                                                                                                                                        // })
+                                                                                                                                                    )
+                                                                                                                                            }
                                                                                                                                         })
-                                                                                                                                            .then((response) => {
-                                                                                                                                                if (response.data == 'ko') {
-                                                                                                                                                    console.log('connexion échoué');
+                                                                                                                                        .catch((error) => {
+                                                                                                                                            console.log("erreur be: ", error);
+                                                                                                                                        });
+                                                                                                                                    this.componentDidMount()
+                                                                                                                                    onClose()
+                                                                                                                                }}
+                                                                                                                            >Valider</button>
+                                                                                                                        </center>
 
-                                                                                                                                                } else {
-                                                                                                                                                    console.log("post ok: res.data ", response.data);
-                                                                                                                                                    localStorage.setItem('idClient', parseInt(response.data._id))
-                                                                                                                                                    localStorage.setItem('nomClient', response.data.nom)
-                                                                                                                                                        (localStorage.getItem('idClient') && localStorage.getItem('afficheList' + service._id) == 'true') ? (
-                                                                                                                                                            axios.put('http://localhost:8080/updateList/' + service._id, {
-                                                                                                                                                                idClient: localStorage.getItem('idClient'),
-                                                                                                                                                                idService: localStorage.getItem('idService' + service._id),
-                                                                                                                                                                afficheList: false
-                                                                                                                                                            }).then(res => {
-                                                                                                                                                                console.log(localStorage.getItem('afficheList'))
-                                                                                                                                                                { this.componentDidMount() }
-                                                                                                                                                            })
-                                                                                                                                                        ) : (
-                                                                                                                                                            axios.put('http://localhost:8080/updateList/' + service._id, {
-                                                                                                                                                                idClient: localStorage.getItem('idClient'),
-                                                                                                                                                                idService: localStorage.getItem('idService' + service._id),
-                                                                                                                                                                afficheList: true
-                                                                                                                                                            }).then(res => {
-                                                                                                                                                                localStorage.setItem('afficheList' + service._id, 'true')
-                                                                                                                                                                console.log(localStorage.getItem('afficheList'))
-                                                                                                                                                                { this.componentDidMount() }
-                                                                                                                                                            })
-                                                                                                                                                        )
-                                                                                                                                                }
-                                                                                                                                            })
-                                                                                                                                            .catch((error) => {
-                                                                                                                                                console.log("erreur be: ", error);
-                                                                                                                                            });
-                                                                                                                                        { this.componentDidMount() }
-                                                                                                                                        onClose()
-                                                                                                                                    }}
-                                                                                                                                >Valider</button>
-                                                                                                                            </center>
-
-                                                                                                                        </div>
+                                                                                                                    </div>
                                                                                                                 );
                                                                                                             }
                                                                                                         })
                                                                                                         { this.componentDidMount() }
                                                                                                     }}>Ajouter dans ma Liste</MDBBtn>
-                                                                                                ) : ('')
+                                                                                                ) : (<MDBBtn onClick={() => {
+                                                                                                    localStorage.setItem('afficheList' + service._id, 'false')
+                                                                                                    this.componentDidMount()
+                                                                                                }}>Ajouter dans ma Liste</MDBBtn>)
                                                                                         )
                                                                                 )
 
@@ -735,10 +758,10 @@ class Home extends React.Component {
                                                             </p>
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image} alt={service.titre} style={{ width: '80%', height: '100%', float: 'right', border: "none" }} />
+                                                            <img class="card-img-top img-thumbnail" src={"https://perfect-back.herokuapp.com/service/" + service.image} alt={service.titre} style={{ width: '80%', height: '100%', float: 'right', border: "none" }} />
 
-                                                            <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image1} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} />
-                                                            <img class="card-img-top img-thumbnail" src={"http://localhost:8080/service/" + service.image2} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} />
+                                                            <img class="card-img-top img-thumbnail" src={"https://perfect-back.herokuapp.com/service/" + service.image1} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} />
+                                                            <img class="card-img-top img-thumbnail" src={"https://perfect-back.herokuapp.com/service/" + service.image2} alt={service.titre} style={{ width: '20%', height: '50%', border: "none" }} />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -775,7 +798,7 @@ export default connect(mapStateToProps)(Home)
 //     (localStorage.getItem('idClient') && localStorage.getItem('afficheList' + service._id) == 'true') ?
 //     (
 //         <MDBBtn onClick={(e) => {
-//             axios.put('http://localhost:8080/updateList/' + service._id, {
+//             axios.put('https://perfect-back.herokuapp.com/updateList/' + service._id, {
 //                 idClient: localStorage.getItem('idClient'),
 //                 idService: localStorage.getItem('idService' + service._id),
 //                 afficheList: false
@@ -788,7 +811,7 @@ export default connect(mapStateToProps)(Home)
 //         (localStorage.getItem('idClient') && localStorage.getItem('afficheList' + service._id) == 'false') ?
 //             (
 //                 <MDBBtn onClick={(e) => {
-//                     axios.put('http://localhost:8080/updateList/' + service._id, {
+//                     axios.put('https://perfect-back.herokuapp.com/updateList/' + service._id, {
 //                         idClient: localStorage.getItem('idClient'),
 //                         idService: localStorage.getItem('idService' + service._id),
 //                         afficheList: true
@@ -811,7 +834,7 @@ export default connect(mapStateToProps)(Home)
 //                                         <center>
 //                                             <button className="btn btn-dark"
 //                                                 onClick={() => {
-//                                                     axios.post('http://localhost:8080/signin', {
+//                                                     axios.post('https://perfect-back.herokuapp.com/signin', {
 //                                                         nom: this.state.nom,
 //                                                         password: this.state.password
 //                                                     })
@@ -820,7 +843,7 @@ export default connect(mapStateToProps)(Home)
 //                                                             localStorage.setItem('idClient', parseInt(response.data._id))
 //                                                             localStorage.setItem('nomClient', response.data.nom)
 //                                                             console.log('reducer REGISTER: ', localStorage.getItem('login'));
-//                                                             axios.post('http://localhost:8080/postList', {
+//                                                             axios.post('https://perfect-back.herokuapp.com/postList', {
 //                                                                 idClient: localStorage.getItem('idClient'),
 //                                                                 idService: localStorage.getItem('idService' + service._id),
 //                                                                 afficheList: true
