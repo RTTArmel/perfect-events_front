@@ -4,8 +4,13 @@ button{
 }
 
 .image{
-    max-height: 200px !important;
-    width: auto !important;
+    width: 600px !important;
+    height: auto !important;
+}
+
+.image1{
+    width: 300px !important;
+    height: auto !important;
 }
 
 .carte{

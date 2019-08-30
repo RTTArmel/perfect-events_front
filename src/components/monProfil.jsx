@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 const MonProfil = () => {
     return (
-        <div>
+        <div  className='container-fluid' style={{ width: "102%", marginLeft: "10%" }}>
             <MDBNavbar  className="" expand="md" scrolling>
                 <MDBNavbarNav left>
                     <MDBNavItem>

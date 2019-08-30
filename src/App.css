@@ -63,3 +63,21 @@ background-repeat: repeat-y;
   cursor: pointer;
   font-size: 30px;
 }
+
+.bonjour{
+  font-size: 30px !important;
+  font-weight: bold !important;
+  color: rgb(252, 179, 85) !important;
+}
+
+.contenuDash{
+  margin-top: 5% !important;
+}
+
+.black-text{
+  background-color: #fff !important;
+}
+
+/* .text{
+  margin-bottom: -35px !important;
+} */

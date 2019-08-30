@@ -10,6 +10,7 @@ class Routes extends React.Component {
     return (
       <div className="container-fluid">
       <Switch>
+      <Route exact path='/admin' component={Article} />
         <Route path='/admin/upload' component={Nouveau} />
         <Route path='/admin/article' component={Article} />
         <Route path='/admin/monProfil' component={MonProfil} />

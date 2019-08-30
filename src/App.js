@@ -10,6 +10,7 @@ import Store from './store/configureStore'
 import Article from './components/article'
 import Admin from './components/admin'
 import Upload from './components/postupload'
+import Panier from './components/panierList'
 
 function App() {
   return (
@@ -18,12 +19,13 @@ function App() {
         <Router>
           <div>
             <Route exact path="/" component={Accueil} />
-            <div className="container">
+            <div className="container-fluid">
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
               <Route path="/admin" component={Admin} />
               <Route path="/upload" component={Upload} />
               <Route path="/article" component={Article} />
+              <Route path="/list" component={Panier} />
             </div>
           </div>
         </Router>

@@ -50,7 +50,7 @@ function connexion(state = initialState, action) {
       //axios.post('https://shrouded-shore-94366.herokuapp.com/', action.value)
       axios.post('http://localhost:8080/login', action.value)      
         .then((response) => {
-          if (response.data.nom == action.value.nom) {
+          if (response.data.nom == action.value.nom && response.data.password == action.value.password) {
             localStorage.setItem('id', response.data._id)
             localStorage.setItem('user', response.data.nom)
             localStorage.setItem('login', 'true')
@@ -64,6 +64,8 @@ function connexion(state = initialState, action) {
       break;
 
     case 'DECONNECT':
+        localStorage.removeItem('id')
+        localStorage.removeItem('user')
       localStorage.setItem('login', 'false');
       break;
 
